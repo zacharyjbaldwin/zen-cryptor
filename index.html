@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/thorbie.css">
+    <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
+    <!--<link rel="stylesheet" href="./css/universal.css">-->
+    <title>Zen-Cryptor by Zachary J. Baldwin</title>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-center">
+            <a id="title" class="nav-item title is-3">Zen-Cryptor by Zachary J. Baldwin</a>
+        </div>
+    </nav>
+    <div class="column">
+        <div id="tabs" class="container">
+            <div class="tabs is-centered is-boxed">
+                <ul>
+                    <li id="introductionAndSetupTab" class="is-active">
+                        <a><span class="icon is-small"><i class="fa fa-book"></i></span>Introduction & Setup</a>
+                    </li>
+                    <li id="textEncryptionTab" class="is-hidden">
+                        <a><span class="icon is-small"><i class="fa fa-file-text-o"></i></span>Text Encryption</a>
+                    </li>
+                    <li id="textDecryptionTab" class="is-hidden">
+                        <a><span class="icon is-small"><i class="fa fa-file-text-o"></i></span>Text Decryption</a>
+                    </li>
+                    <li id="fileEncryptionTab" class="is-hidden">
+                        <a><span class="icon is-small"><i class="fa fa-file-zip-o"></i></span>File Encryption</a>
+                    </li>
+                    <li id="fileDecryptionTab" class="is-hidden">
+                        <a><span class="icon is-small"><i class="fa fa-file-archive-o"></i></span>File Decryption</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="pages" class="container">
+        <div id="introductionAndSetupPage" class="content">
+            <div class="row">
+                <div class="column">
+                    <h1>Introduction</h1>
+                    <p>Everything that you need to know about Zen-Cryptor.</p>
+                    <h3>About</h3>
+                    <p>Zen-Cryptor is a lightweight tool created with NodeJS and Electron used to encrypt text and files, and decrypt text and files.</p>
+                    <h3>License</h3>
+                    <p>Zen-Cryptor is open source and licensed under the <a id="openLicenseModal">MIT license</a>.</p>
+                </div>
+                <div class="column is-one-third">
+                    <h1>Setup</h1>
+                    <a id="openSetupModalButton" class="button is-fullwidth">Launch Setup</a>
+                </div>
+            </div>
+        </div>
+        <div id="textEncryptionPage" class="content is-hidden">
+            <div class="row">
+                <div class="column">
+                    <h1>Text Encryption</h1>
+                    <p>Encrypting text obfuscates it based on your password and the encryption algorithm you have chosen.</p>
+                </div>
+                <div class="column is-two-thirds">
+                    <label class="label">Type text below to be encrypted:</label>
+                    <p class="control">
+                        <textarea id="textToBeEncrypted" class="textarea" placeholder="Text to be encrypted..."></textarea>
+                    </p>
+                    <a id="encryptTextButton" class="button is-fullwidth is-disabled">Encrypt Text</a>
+                </div>
+            </div>
+        </div>
+        <div id="textDecryptionPage" class="content is-hidden">
+            <div class="row">
+                <div class="column">
+                    <h1>Text Decryption</h1>
+                    <p>Decrypting text deobfuscates it based on the password and the encryption algorithm that it was encrypted in.</p>
+                </div>
+                <div class="column is-two-thirds">
+                    <label class="label">Type text below to be decrypted:</label>
+                    <p class="control">
+                        <textarea id="textToBeDecrypted" class="textarea" placeholder="Text to be decrypted..."></textarea>
+                    </p>
+                    <a id="decryptTextButton" class="button is-fullwidth is-disabled">Decrypt Text</a>
+                </div>
+            </div>
+        </div>
+        <div id="fileEncryptionPage" class="content is-hidden">
+            <div class="row">
+                <div class="column">
+                    <h1>File Encryption</h1>
+                    <p>Encrypting files obfuscates the contents of the files chosen based on your password and the encryption algorithm you have chosen.</p>
+                    <p>You are able to batch-encrypt files, meaning that you can encrypt multiple files at once.</p>
+                    <p>Files that are encrypted with Zen-Cryptor are converted to '.zc' files. For example, if one were to encrypt 'sunny-beach-home.jpg' it would be converted to 'sunny-beach-home.jpg.zc'.</p>
+                </div>
+                <div class="column is-two-thirds">
+                    <table class="que-table is-striped">
+                        <thead>
+                            <tr>
+                                <th>File Queue:</th>
+                                <th><span class="add-files icon is-pulled-right plus"><i class="fa fa-plus"></i></span></th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <br>
+                    <a class="do-action button is-fullwidth is-disabled">Encrypt File(s)</a>
+                </div>
+            </div>
+        </div>
+        <div id="fileDecryptionPage" class="content is-hidden">
+            <div class="row">
+                <div class="column">
+                    <h1>File Decryption</h1>
+                    <p>Decrypting files deobfuscates the contents of the files encrypted based on the password and encryption algorithm that it was encrypted with.</p>
+                    <p>You are able to batch-decrypt files, meaning that you can decrypt multiple files at once.</p>
+                    <p>At the moment, you can only decrypt '.zc' files, which have been encrypted with Zen-Cryptor.</p>
+                    <p>Encrypted '.zc' files are converted and returned to their original filetype. For example, if one were to decrypt 'sunny-beach-home.jpg.zc' it would be converted to 'sunny-beach-home.jpg'.
+                        <!--<p>Files that are encrypted with Zen-Cryptor are converted to '.zc' files. For example, if one were to encrypt the file, 'sunny-beach-home.jpg' it would be converted to 'sunny-beach-home.jpg.zc'.</p>-->
+                </div>
+                <div class="column is-two-thirds">
+                    <table id="decryptFilesQueTable" class="is-striped">
+                        <thead>
+                            <tr>
+                                <th>File Queue:</th>
+                                <th><span id="chooseFilesToDecryptButton" class="icon is-pulled-right plus"><i class="fa fa-plus"></i></span></th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <br>
+                    <a id="decryptFilesButton" class="button is-fullwidth is-disabled">Decrypt File(s)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="decryptedTextModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card result-modal">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Decrypted text:</p>
+            </header>
+            <section class="modal-card-body">
+                <div class="row">
+                    <div class="column">
+                        <label class="label">Select and press CTRL + C to copy.</label>
+                        <!--<p class="control">-->
+                        <!--<textarea id="decryptedText" class="textarea is-disabled is-fullwidth" placeholder="Decrypted text..."></textarea>-->
+                        <p id="decryptedText"></p>
+                        <!--</p>-->
+                    </div>
+            </section>
+            <footer class="modal-card-foot">
+                <a id="decryptedTextModalDoneButton" class="button">Done</a>
+                <!--<a id="decryptedTextModalCopyButton" class="button">Copy</a>-->
+            </footer>
+            </div>
+        </div>
+    </div>
+
+    <div id="encryptedTextModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card result-modal">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Encrypted text:</p>
+            </header>
+            <section class="modal-card-body">
+                <div class="row">
+                    <div class="column">
+                        <label class="label">Select and press CTRL + C to copy.</label>
+                        <!--<p class="control">-->
+                        <!--<textarea id="encryptedText" class="textarea is-disabled is-fullwidth" placeholder="Encrypted text..."></textarea>-->
+                        <p id="encryptedText"></p>
+                        <!--</p>-->
+                    </div>
+            </section>
+            <footer class="modal-card-foot">
+                <a id="encryptedTextModalDoneButton" class="button">Done</a>
+                <!--<a id="encryptedTextModalCopyButton" class="button">Copy</a>-->
+            </footer>
+            </div>
+        </div>
+    </div>
+    <div id="errorMessageModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card encrypted-text-modal">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Error:</p>
+            </header>
+            <section class="modal-card-body">
+                <div class="row">
+                    <div class="column">
+                        <label class="label">An error has occured:</label>
+                        <p class="error-message"></p>
+                    </div>
+            </section>
+            <footer class="modal-card-foot">
+                <a class="button close-modal">Ok</a>
+            </footer>
+            </div>
+        </div>
+    </div>
+    <div id="fileEncryptionSettingsModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Encryption settings:</p>
+            </header>
+            <section class="modal-card-body">
+                <div class="row">
+                    <div class="column">
+                        <label class="label">Output folder:</label>
+                        <p class="control has-icon has-icon-right">
+                            <input id="fileEncryptionSettingsModalOutputFolderTextbox" class="input" type="text" placeholder="Password...">
+                        </p>
+                    </div>
+            </section>
+            <footer class="modal-card-foot">
+                <a id="fileEncryptionSettingsModalEncryptButton" class="button is-success">Encrypt</a>
+                <a class="button" id="fileEncryptionSettingsModalCancelButton">Cancel</a>
+            </footer>
+            </div>
+        </div>
+    </div>
+    <div id="licenseModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card encrypted-text-modal">
+            <header class="modal-card-head">
+                <p class="modal-card-title">MIT license:</p>
+            </header>
+            <section class="modal-card-body">
+                <div class="row">
+                    <div class="column">
+                        <label class="label">Please reference this license for copyright information.</label>
+                        <p>
+                            Copyright 2017 Zachary J. Baldwin
+                        </p>
+                        <br>
+                        <p>
+                            Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify,
+                            merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+                        </p>
+                        <br>
+                        <p>
+                            The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+                        </p>
+                        <br>
+                        <p>
+                            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+                            BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+                        </p>
+                    </div>
+            </section>
+            <footer class="modal-card-foot">
+                <a class="button close-modal">Close</a>
+                <!--<a id="encryptedTextModalCopyButton" class="button">Copy</a>-->
+            </footer>
+            </div>
+        </div>
+    </div>
+    <div id="setupModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card setup-modal">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Setup:</p>
+            </header>
+            <section class="modal-card-body">
+                <div class="row">
+                    <div class="column">
+                        <label class="label">Create a password:</label>
+                        <p class="control has-icon has-icon-right">
+                            <input id="setupModalPasswordTextBox" class="input" type="password" placeholder="Password...">
+                            <span class="icon is-small">
+                                <i id="setupModalPasswordTextBoxCheckBox" class="fa fa-check is-hidden"></i>
+                            </span>
+                        </p>
+                        <label class="label">Confirm your password:</label>
+                        <p class="control has-icon has-icon-right">
+                            <input id="setupModalConfirmPasswordTextBox" class="input is-disabled" type="password" placeholder="Confirm password...">
+                            <span class="icon is-small">
+                                <i id="setupModalConfirmPasswordTextBoxCheckBox" class="fa fa-check is-hidden"></i>
+                            </span>
+                        </p>
+                        <span id="setupModalErrorMessage" class="help is-danger is-hidden">Passwords do not match!</span>
+                        <label class="label">Encryption / decryption algorithm:</label>
+                        <p class="control">
+                            <span class="select is-fullwidth">
+                                <select id="setupModalEncryptionAlgorithmSelector"></select>
+                            </span>
+                        </p>
+                    </div>
+            </section>
+            <footer class="modal-card-foot">
+                <a id="setupModalApplySettingsButton" class="button is-success is-disabled">Apply Settings</a>
+                <a class="button close-modal">Cancel</a>
+            </footer>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="./js/index.html.js"></script>
+</body>
+
+</html>

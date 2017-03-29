@@ -1,0 +1,35 @@
+.setup-modal {
+    width: 50%;
+}
+
+.tabs li.is-active a {
+    color: black;
+}
+
+.content {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.textarea {
+    height: 350px;
+}
+
+.plus {
+    cursor: pointer;
+}
+
+.zc-link {
+    color: red;
+}
+
+.zc-link:hover {
+    /*color: purple;*/
+    color: red;
+    /*text-decoration: underline;*/
+    font-weight: bold
+}
+
+.result-modal {
+    width: 70%;
+}

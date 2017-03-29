@@ -1,0 +1,17 @@
+{
+  "name": "encryptor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "electron app.js"
+  },
+  "author": "Zachary J. Baldwin <zacharyjbaldwin@gmail.com> (https://www.github.com/zacharyjbaldwin)",
+  "license": "MIT",
+  "dependencies": {
+    "bulma": "^0.4.0",
+    "electron": "^1.6.2",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.0"
+  }
+}
